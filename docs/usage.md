@@ -255,7 +255,7 @@ option to specify which columns to show.
 The `--columns` takes a comma separated list of columns (no spaces!) which
 should be shown.  The columns must be specified by their `id` field. For
 information on what `id` fields are supported by a template, take a look in the
-template. Usually it's the column title, but in lowercase and with spaces
+template in `/ansible-cmdb/src/ansiblecmdb/data/tpl/`. Usually it's the column title, but in lowercase and with spaces
 replaced by underscores.
 
 For example:
@@ -275,6 +275,10 @@ For example:
     db03.prod.local         Debian 6.0.10  192.168.58.3   0g   1  
     zoltar.electricmonk.nl  Ubuntu 14.04   194.187.79.11  4g   2 
 
+If `id` fields like `log_path` and `ram` were added to the above command, their columns 
+would not have been displayed due to being absent and defined differently in the 
+`txt_table` template, respectively.
+
 You can use the `--exclude-cols` option to exclude specific columns. It works
 the same as `--columns`. For example:
 
@@ -282,7 +286,7 @@ the same as `--columns`. For example:
                  --exclude-cols mem_usage,swap_usage,disk_usage,physdisk_size \
                  -i hosts \
                  facts/
-
+                 
 If you want to add custom columns, please refer to [Custom
 columns](#custom-columns) section.
 
