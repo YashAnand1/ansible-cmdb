@@ -439,8 +439,8 @@ Generate the overview:
 
 The software items will be listed under the "*Custom facts*" heading.
 
-A user may wish to view facts like `HTTPD`, that are not present in the Ansible-Fact files by default.
-The following steps can be followed for automating the creation of custom-facts using Ansible's Host Local Facts:
+Alternatively, users may wish to view facts like `HTTPD`, that are not present in the Ansible-Fact files by default.
+The following steps can also followed for automating the creation of custom-facts using Ansible's Host Local Facts:
 - Creating `facts.d` directory using `mkdir -p /etc/ansible/facts.d` inside connected machines
 - Creating a Local Host Fact file using `vim /etc/ansible/facts.d/<factName>.fact`. These are of 2 type:
     - **Read Only Local Host Facts**: Follow dictionary or JSON syntax (Manual)
@@ -451,14 +451,14 @@ The following steps can be followed for automating the creation of custom-facts 
         state=started
         enabled=true
         ```
-    - **Executable Local Host Files**: A script for creating Local Host Facts with `700` permission (Automated)
+    - **Executable Local Host Files**: Scripts for creating dictionaries with `700` permission (Automated)
         ```
         python_ver=$(python3 --version | cut -d' ' -f2)
         cat << EOF
         { "Python_version": "${python_ver}" }
         EOF
         ```
-- Fetching Host-Facts using `ansible -m setup --tree out/ all` will include both, custom and default facts. 
+- Fetching Host-Facts using `ansible -m setup --tree out/ all` will include both, custom and default facts. When `./ansible-cmdb out/ > overview.html` is run again, the CMDB-output will include the custom-facts under `Ansible_Local` key.
 
 ## Custom columns
 
